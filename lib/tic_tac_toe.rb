@@ -80,14 +80,14 @@ def current_player
 end
 
 WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-def won?(board)
+def won?
  WIN_COMBINATIONS.each do |win_combination|
    win_index_1 = win_combination[0]
    win_index_2 = win_combination[1]
    win_index_3 = win_combination[2]
-   position_1 = board[win_index_1] # value of board at win_index_1
-   position_2 = board[win_index_2] # value of board at win_index_2
-   position_3 = board[win_index_3] # value of board at win_index_3
+   position_1 = @board[win_index_1] # value of board at win_index_1
+   position_2 = @board[win_index_2] # value of board at win_index_2
+   position_3 = @board[win_index_3] # value of board at win_index_3
    if position_1 == "X" && position_2 == "X" && position_3 == "X"
       return win_combination
     elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
@@ -97,44 +97,44 @@ def won?(board)
   return false
 end
 
-def full?(board)
-   board.all? {|i| i == "X" || i == "O"}
+def full?
+   @board.all? {|i| i == "X" || i == "O"}
 end
 
-def draw?(board)
-   if !won?(board) && full?(board)
+def draw?
+   if !won? && full?
      return true
-   else won?(board)
+   else won?
      return false
    end
 end
 
-def over?(board)
-   if draw?(board) || won?(board) || full?(board)
+def over?
+   if draw? || won? || full?
      return true
    end
 end
 
-def winner(board)
+def winner
   index = []
-  index = won?(board)
+  index = won?
   if index == false
     return nil
-  elsif board[index[0]] == "X"
+  elsif @board[index[0]] == "X"
       return "X"
     else
       return "O"
   end
 end
 
-def play(board)
-  until over?(board)
-    turn(board)
+def play
+  until over?
+    turn
   end
-  if won?(board)
-   winner(board) == "X" || winner(board) == "O"
-    puts "Congratulations #{winner(board)}!"
-  elsif draw?(board)
+  if won?
+   winner == "X" || winner == "O"
+    puts "Congratulations #{winner}!"
+  elsif draw?
     puts "Cat's Game!"
   end
 end
