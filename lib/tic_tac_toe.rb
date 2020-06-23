@@ -28,9 +28,9 @@ def position_taken?(index)
   end
 end
 
-def valid_move?(board, index)
-  def position_taken?(board, index)
-    if board[index] == " " || board[index] == "" || board[index] == nil
+def valid_move?(index)
+  def position_taken?(index)
+    if @board[index] == " " || @board[index] == "" || @board[index] == nil
       return false
     else
       return true
